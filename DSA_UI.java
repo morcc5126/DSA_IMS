@@ -4,7 +4,7 @@ package dsa_ui;
 public class DSA_UI {
 
     public static void main(String[] args) {
-        System.out.println("=========== Solar System Extraction ===========");
+        /*System.out.println("=========== Solar System Extraction ===========");
         System.out.println("[1] Log-In");
         System.out.println("[2] Exit");
         System.out.println("Options (1-2): ");
@@ -59,7 +59,10 @@ public class DSA_UI {
         
         System.out.println("Mineral: Magnesium");
         System.out.println("Supplier: Earth");
-        System.out.println("Quantity: 10,000");
+        System.out.println("Quantity: 10,000");*/
+        
+        InventoryManagementSystem ims = new InventoryManagementSystem();
+        ims.start();
     }
     
 }
