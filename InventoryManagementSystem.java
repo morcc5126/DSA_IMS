@@ -7,6 +7,9 @@ public class InventoryManagementSystem {
     private InventoryManager inventoryManager = new InventoryManager();;
     private Scanner scanner = new Scanner(System.in);
     
+    
+    //mainly ang focus lang ng class na'to ay input and output
+    
     public void start() {
         System.out.println("--- Miniral Inventory Management System ---");
         
@@ -40,7 +43,7 @@ public class InventoryManagementSystem {
                     viewInventoryValue();
                     break;
                 case 9:
-                    System.out.println("Thank you for using the Inventory Management System!");
+                    System.out.println("Thank you for using the Solar System Extraction Mineral Inventory Management System!");
                     return;
                 default:
                     System.out.println("Invalid choice! Please try again.");
@@ -68,13 +71,12 @@ public class InventoryManagementSystem {
     //Main menu functions
     private void addProduct() {
         System.out.println("\n----------- Add New Product -----------");
-        
         String productId = getStringInput("Enter Product ID: ");
-        String name = getStringInput("Enter Product Name: ");
-        double price = getDoubleInput("Enter Price: ");
-        int quantity = getIntInput("Enter Quantity: ");
-        String category = getStringInput("Enter Category: ");
-        String supplier = getStringInput("Enter Supplier: ");
+        String name      = getStringInput("Enter Product Name: ");
+        double price     = getDoubleInput("Enter Price: ");
+        int quantity     = getIntInput("Enter Quantity: ");
+        String category  = getStringInput("Enter Category: ");
+        String supplier  = getStringInput("Enter Supplier: ");
         
         Product product = new Product(productId, name, price, quantity, category, supplier);
         inventoryManager.addProduct(product);
@@ -83,28 +85,30 @@ public class InventoryManagementSystem {
     private void removeProduct() {
         System.out.println("\n----------- Remove Product -----------");
         String productId = getStringInput("Enter Product ID to remove: ");
+        
         inventoryManager.removeProduct(productId);
     }
     
     private void updateQuantity() {
         System.out.println("\n----------- Update Quantity -----------");
         String productId = getStringInput("Enter Product ID: ");
-        int newQuantity = getIntInput("Enter new quantity: ");
+        int newQuantity  = getIntInput("Enter new quantity: ");
+        
         inventoryManager.updateQuantity(productId, newQuantity);
     }
     
     private void updatePrice() {
         System.out.println("\n----------- Update Price -----------");
         String productId = getStringInput("Enter Product ID: ");
-        double newPrice = getDoubleInput("Enter new price: ");
+        double newPrice  = getDoubleInput("Enter new price: ");
         inventoryManager.updatePrice(productId, newPrice);
     }
     
     private void searchProduct() {
         System.out.println("\n----------- Search Product -----------");
-        System.out.println("1. Search by ID");
-        System.out.println("2. Search by Name");
-        System.out.println("3. Search by Category");
+        System.out.println("[1] Search by ID");
+        System.out.println("[2] Search by Name");
+        System.out.println("[3] Search by Category");
         int choice = getIntInput("Choose search option: ");
         
         switch (choice) {
@@ -145,7 +149,7 @@ public class InventoryManagementSystem {
     private void viewLowStock() {
         System.out.println("\n----------- Low Stock Products -----------");
         int threshold = getIntInput("Enter low stock threshold: ");
-        List<Product> lowStockProducts = inventoryManager.getLowStockProducts(threshold);
+        List<Product> lowStockProducts = inventoryManager.getLowStockProducts(threshold); //nili-list nito yung mga mahahanap ng search gamit arraylist
         displaySearchResults(lowStockProducts, "Low Stock Products (Threshold: " + threshold + ")");
     }
     
@@ -198,6 +202,5 @@ public class InventoryManagementSystem {
                 System.out.println("Invalid input! Please enter a valid number.");
             }
         }
-    }
-    
+    } 
 }
