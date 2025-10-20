@@ -1,26 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dsa_ui;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class InventoryManagementSystem {
-    private InventoryManager inventoryManager;
-    private Scanner scanner;
-    
-    public InventoryManagementSystem() {
-        inventoryManager = new InventoryManager();
-        scanner = new Scanner(System.in);
-    }
+    private InventoryManager inventoryManager = new InventoryManager();;
+    private Scanner scanner = new Scanner(System.in);
     
     public void start() {
-        System.out.println("=== Inventory Management System ===");
+        System.out.println("--- Miniral Inventory Management System ---");
         
         while (true) {
-            displayMenu();
+            mainMenu();
             int choice = getIntInput("Enter your choice: ");
             
             switch (choice) {
@@ -60,57 +51,57 @@ public class InventoryManagementSystem {
         }
     }
     
-    private void displayMenu() {
-        System.out.println("\n===== MAIN MENU =====");
-        System.out.println("1. Add Product");
-        System.out.println("2. Remove Product");
-        System.out.println("3. Update Quantity");
-        System.out.println("4. Update Price");
-        System.out.println("5. Search Product");
-        System.out.println("6. View All Products");
-        System.out.println("7. View Low Stock Products");
-        System.out.println("8. View Total Inventory Value");
-        System.out.println("9. Exit");
-        System.out.println("=====================");
+    private void mainMenu() {
+        System.out.println("\n----------- MAIN MENU -----------");
+        System.out.println("[1] Add Product");
+        System.out.println("[2] Remove Product");
+        System.out.println("[3] Update Quantity");
+        System.out.println("[4] Update Price");
+        System.out.println("[5] Search Product");
+        System.out.println("[6] View All Products");
+        System.out.println("[7] View Low Stock Products");
+        System.out.println("[8] View Total Inventory Value");
+        System.out.println("[9] Exit");
+        System.out.println("---------------------------------");
     }
     
+    //Main menu functions
     private void addProduct() {
-        System.out.println("\n----- Add New Product -----");
+        System.out.println("\n----------- Add New Product -----------");
         
         String productId = getStringInput("Enter Product ID: ");
         String name = getStringInput("Enter Product Name: ");
-        String description = getStringInput("Enter Description: ");
         double price = getDoubleInput("Enter Price: ");
         int quantity = getIntInput("Enter Quantity: ");
         String category = getStringInput("Enter Category: ");
         String supplier = getStringInput("Enter Supplier: ");
         
-        Product product = new Product(productId, name, description, price, quantity, category, supplier);
+        Product product = new Product(productId, name, price, quantity, category, supplier);
         inventoryManager.addProduct(product);
     }
     
     private void removeProduct() {
-        System.out.println("\n----- Remove Product -----");
+        System.out.println("\n----------- Remove Product -----------");
         String productId = getStringInput("Enter Product ID to remove: ");
         inventoryManager.removeProduct(productId);
     }
     
     private void updateQuantity() {
-        System.out.println("\n----- Update Quantity -----");
+        System.out.println("\n----------- Update Quantity -----------");
         String productId = getStringInput("Enter Product ID: ");
         int newQuantity = getIntInput("Enter new quantity: ");
         inventoryManager.updateQuantity(productId, newQuantity);
     }
     
     private void updatePrice() {
-        System.out.println("\n----- Update Price -----");
+        System.out.println("\n----------- Update Price -----------");
         String productId = getStringInput("Enter Product ID: ");
         double newPrice = getDoubleInput("Enter new price: ");
         inventoryManager.updatePrice(productId, newPrice);
     }
     
     private void searchProduct() {
-        System.out.println("\n----- Search Product -----");
+        System.out.println("\n----------- Search Product -----------");
         System.out.println("1. Search by ID");
         System.out.println("2. Search by Name");
         System.out.println("3. Search by Category");
@@ -146,27 +137,27 @@ public class InventoryManagementSystem {
     }
     
     private void viewAllProducts() {
-        System.out.println("\n----- All Products -----");
+        System.out.println("\n----------- All Products -----------");
         List<Product> products = inventoryManager.getAllProducts();
         displaySearchResults(products, "All Products");
     }
     
     private void viewLowStock() {
-        System.out.println("\n----- Low Stock Products -----");
+        System.out.println("\n----------- Low Stock Products -----------");
         int threshold = getIntInput("Enter low stock threshold: ");
         List<Product> lowStockProducts = inventoryManager.getLowStockProducts(threshold);
         displaySearchResults(lowStockProducts, "Low Stock Products (Threshold: " + threshold + ")");
     }
     
     private void viewInventoryValue() {
-        System.out.println("\n----- Inventory Value -----");
+        System.out.println("\n----------- Inventory Value -----------");
         double totalValue = inventoryManager.getTotalInventoryValue();
-        System.out.printf("Total Inventory Value: $%.2f\n", totalValue);
+        System.out.println("Total Inventory Value: ₱" + totalValue + "\n");
     }
     
     private void displaySearchResults(List<Product> products, String title) {
         System.out.println("\n" + title);
-        System.out.println("=" + "=".repeat(title.length()));
+        System.out.println("-".repeat(title.length()));
         
         if (products.isEmpty()) {
             System.out.println("No products found.");
@@ -178,17 +169,18 @@ public class InventoryManagementSystem {
         }
     }
     
-    // Utility methods for input
+    
+    // Scanner shortcut
     private String getStringInput(String prompt) {
         System.out.print(prompt);
-        return scanner.nextLine().trim();
+        return scanner.nextLine().strip();
     }
     
     private int getIntInput(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
-                int value = Integer.parseInt(scanner.nextLine().trim());
+                int value = Integer.parseInt(scanner.nextLine().strip());
                 return value;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input! Please enter a valid integer.");
@@ -200,7 +192,7 @@ public class InventoryManagementSystem {
         while (true) {
             try {
                 System.out.print(prompt);
-                double value = Double.parseDouble(scanner.nextLine().trim());
+                double value = Double.parseDouble(scanner.nextLine().strip());
                 return value;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input! Please enter a valid number.");
@@ -208,8 +200,4 @@ public class InventoryManagementSystem {
         }
     }
     
-    public static void main(String[] args) {
-        InventoryManagementSystem system = new InventoryManagementSystem();
-        system.start();
-    }
 }
