@@ -5,6 +5,8 @@ import java.util.*;
 public class InventoryManager {
     private Map<String, Product> products = new HashMap<>();
     
+    //focus ng class na'to ay ang pag-process at store ng data sa hashmap
+    
     
     // Add a new product
     public boolean addProduct(Product product) {
@@ -12,7 +14,8 @@ public class InventoryManager {
             System.out.println("Product with ID " + product.getProductId() + " already exists!");
             return false; //pangpa-end lang ng method yung return, wala itong ginagawa
         }
-        products.put(product.getProductId(), product);
+        
+        products.put(product.getProductId(), product); //   productID(key) : productInfo(data)
         System.out.println("Product added successfully!");
         return true;
     }
@@ -23,6 +26,7 @@ public class InventoryManager {
             System.out.println("Product with ID " + productId + " not found!");
             return false; //pangpa-end lang ng method yung return, wala rin itong ginagawa
         }
+        
         Product removed = products.remove(productId);
         System.out.println("Product " + removed.getName() + " removed successfully!");
         return true;
